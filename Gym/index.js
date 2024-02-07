@@ -1,137 +1,113 @@
-const yogaButton = document.querySelector("#yoga-btn");
-const soloButton = document.querySelector("#solo-btn");
-const groupButton = document.querySelector("#group-btn");
-const stretchingButton = document.querySelector("#stretching-btn");
+let navbar = document.querySelector(".navbar");
 
-const textDiv = document.getElementById("sport-1");
-
-const image = document.getElementById("sport-img-1");
-
-
-yogaButton.addEventListener("click" ,() =>{
-    yogaButton.classList.add("active-button");
-    yogaButton.classList.remove("deactive-button");
-    soloButton.classList.remove("active-button");
-    groupButton.classList.remove("active-button");
-    stretchingButton.classList.remove("active-button");
-    soloButton.classList.add("deactive-button");
-    groupButton.classList.add("deactive-button");
-    stretchingButton.classList.add("deactive-button");
-    image.setAttribute("src", "/Gym/assets/yoga.jpg");
-    textDiv.innerHTML = `<h2 class="display-6 my-3"><b>Why Are Your Yoga?</b><p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum asperiores accusamus ea amet soluta beatae quasi, sequi quidem unde perspiciatis!</p></h2><h2 class="display-6 my-3"><b>When Comes Yoga Your Time</b><p class="my-3">Lorem ipsum dolor sit amet </p></h2>`;
-
-}
-);
-
-soloButton.addEventListener("click" ,() =>{
-    soloButton.classList.add("active-button");
-    soloButton.classList.remove("deactive-button");
-    yogaButton.classList.remove("active-button");
-    groupButton.classList.remove("active-button");
-    stretchingButton.classList.remove("active-button");
-    yogaButton.classList.add("deactive-button");
-    groupButton.classList.add("deactive-button");
-    stretchingButton.classList.add("deactive-button");
-    image.setAttribute("src", "/Gym/assets/solo.jpg");
-    textDiv.innerHTML = `<h2 class="display-6 my-3"><b>Why Are Your solo?</b><p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum asperiores accusamus ea amet soluta beatae quasi, sequi quidem unde perspiciatis!</p></h2><h2 class="display-6 my-3"><b>When Comes Solo Your Time</b><p class="my-3">Lorem ipsum dolor sit amet </p></h2>`;
-
-}
-);
-
-groupButton.addEventListener("click" ,() =>{
-    groupButton.classList.add("active-button");
-    groupButton.classList.remove("deactive-button");
-    soloButton.classList.remove("active-button");
-    yogaButton.classList.remove("active-button");
-    stretchingButton.classList.remove("active-button");
-    soloButton.classList.add("deactive-button");
-    yogaButton.classList.add("deactive-button");
-    stretchingButton.classList.add("deactive-button");
-    image.setAttribute("src", "/Gym/assets/group.webp");
-    textDiv.innerHTML = `<h2 class="display-6 my-3"><b>Why Are Your Group?</b><p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum asperiores accusamus ea amet soluta beatae quasi, sequi quidem unde perspiciatis!</p></h2><h2 class="display-6 my-3"><b>When Comes Group Your Time</b><p class="my-3">Lorem ipsum dolor sit amet </p></h2>`;
-
+window.addEventListener("scroll", function () {
+  if (window.scrollY === 0) {
+    navbar.classList.remove("scrolled");
+  } else {
+    navbar.classList.add("scrolled");
+  }
 });
 
-stretchingButton.addEventListener("click" ,() =>{
-    stretchingButton.classList.add("active-button");
-    stretchingButton.classList.remove("deactive-button");
-    soloButton.classList.remove("active-button");
-    groupButton.classList.remove("active-button");
-    yogaButton.classList.remove("active-button");
-    soloButton.classList.add("deactive-button");
-    groupButton.classList.add("deactive-button");
-    yogaButton.classList.add("deactive-button");
-    image.setAttribute("src", "/Gym/assets/stret.webp");
-    textDiv.innerHTML = `<h2 class="display-6 my-3"><b>Why Are Your Stretch?</b><p class="my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum asperiores accusamus ea amet soluta beatae quasi, sequi quidem unde perspiciatis!</p></h2><h2 class="display-6 my-3"><b>When Comes Stretch Your Time</b><p class="my-3">Lorem ipsum dolor sit amet </p></h2>`;
-}
-);
+let menu = document.querySelector(".menu");
+
+window.addEventListener("scroll", function () {
+  if (window.scrollY === 0) {
+    menu.classList.remove("scrolling");
+  } else {
+    menu.classList.add("scrolling");
+  }
+});
+
+document.getElementById("btn-yoga").addEventListener("click", function () {
+  showInfo("yoga");
+});
+
+document.getElementById("btn-group").addEventListener("click", function () {
+  showInfo("group");
+});
+
+document.getElementById("btn-solo").addEventListener("click", function () {
+  showInfo("solo");
+});
+
+document.getElementById("btn-streching").addEventListener("click", function () {
+  showInfo("streching");
+});
 
 
-const bmiHeight = document.getElementById("height");
-const bmiWeight = document.getElementById("weight");
-let resultBMI=0;
+function showInfo(infoType) {
+  document.querySelectorAll(".info").forEach(function (info) {
+    info.style.display = "none";
+  });
 
-function calculateBMI(){
-   let heightValue = parseFloat(bmiHeight.value) / 100;
-   let weightValue = parseFloat(bmiWeight.value);
-   if (isNaN(heightValue) || isNaN(weightValue)) {
-    document.querySelector(".triangle-up").setAttribute("visibility","hidden");
-        return false;
-    } else {
-      resultBMI = weightValue / Math.pow((heightValue), 2);
-      showResult();
-    }
-}
-
-bmiWeight.addEventListener("input",()=>calculateBMI());
-bmiHeight.addEventListener("input",()=>calculateBMI());
-
-// function showResult() {
-//     console.log(resultBMI);
-//     const triangle = document.getElementById("triangle");
-//     triangle.setAttribute("style","visibility: visible");
-    
-
-//     switch(resultBMI){
-//         case resultBMI<18.5:
-            
-//             triangle.setAttribute("style", "left:1500px;");
-//             break;
-//             case (resultBMI<24.9) && (resultBMI>=18.5):
-//             triangle.setAttribute("style", "left:1600px;");
-//             break;
-//             case (resultBMI<29.9) && (resultBMI>=25):
-//             triangle.setAttribute("style", "left:1700px;");
-//             break;
-//             case (resultBMI<34.9) && (resultBMI>=30):
-//             triangle.setAttribute("style", "left:1800px;");
-//             break;
-//             case (resultBMI>=35):
-//             triangle.setAttribute("style", "left:1900px;");
-//             break;
-//         default:
-//             break;
-//     }
-
-function showResult() {
-    console.log(resultBMI);
-    const triangle = document.getElementById("triangle");
-    triangle.style.visibility = "visible";
-
-    if (resultBMI < 18.5) {
-        triangle.style.left = "14%";
-    } else if (resultBMI >= 18.5 && resultBMI < 24.9) {
-        triangle.style.left = "31%";
-    } else if (resultBMI >= 25 && resultBMI < 29.9) {
-        triangle.style.left = "48%";
-    } else if (resultBMI >= 30 && resultBMI < 34.9) {
-        triangle.style.left = "65%";
-    } else if (resultBMI >= 35) {
-        triangle.style.left = "83%";
-    }
+  document.getElementById("info-" + infoType).style.display = "flex";
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  let yogaButton = document.getElementById("btn-yoga");
+  if (yogaButton) {
+    yogaButton.focus();
+    window.scrollTo(0, 0);
+  }
+});
 
+document
+  .getElementById("btn-calculate")
+  .addEventListener("click", calculateBMI);
 
+function calculateBMI() {
+  console.log("BMI hesapla");
+  let height = document.getElementById("heightInput").value;
+  let weight = document.getElementById("weightInput").value;
 
+  let bmi = weight / (height / 100) ** 2;
 
+  let arrowImage = document.querySelector(".arrow");
+  arrowImage.style.left = calculateLeftFromBMI(bmi) + "%";
+}
+
+function calculateLeftFromBMI(bmi) {
+  let leftPosition;
+
+  if (bmi >= 0 && bmi <= 18.5) {
+    leftPosition = 14;
+  } else if (bmi > 18.5 && bmi <= 24.9) {
+    leftPosition = 31;
+  } else if (bmi >= 25 && bmi <= 29.9) {
+    leftPosition = 47;
+  } else if (bmi >= 30 && bmi <= 34.9) {
+    leftPosition = 63;
+  } else if (bmi >= 35) {
+    leftPosition = 80;
+  } else {
+    leftPosition = 14;
+  }
+
+  return leftPosition;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  let form = document.querySelector(".form");
+  let sendButton = form.querySelector('button[type="submit"]');
+  let inputName = form.querySelector("#yourName");
+  let inputEmail = form.querySelector("#yourEmail");
+  let textareaMessage = form.querySelector("#message");
+
+  sendButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    inputName.value = "";
+    inputEmail.value = "";
+    textareaMessage.value = "";
+  });
+
+  document.getElementById("menu-icon").addEventListener("click", function () {
+    document.querySelectorAll(".menu").forEach(function (menu) {
+      if (menu.style.display === "block") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "block";
+      }
+    });
+  });
+});
